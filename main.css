@@ -48,13 +48,13 @@ p {
 
 #discography {
   color: white;
-  padding: 6%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
- 
-.col-sm-6
- {
-  padding: 5%;
-}
+
 
 
 /*  or instead of center-block:
@@ -85,6 +85,10 @@ p {
 
 .btn {
   width: 90px;
+}
+
+.fit {
+  min-height: 100%;
 }
 
 
