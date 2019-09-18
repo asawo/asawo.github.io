@@ -17,7 +17,6 @@ h1, h2, h4, h5, p {
   color: white;
   text-align: center;
   min-height: 100%;
-/*align text vertically*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,32 +27,16 @@ h1, h2, h4, h5, p {
   color: black;
   max-width: 500px;
   min-height: 100%;
-/*align text vertically*/
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#discography {
+#discography, #members {
   color: white;
   min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-
-
-/*  or instead of center-block:
-.img-responsive {
-    margin: 0 auto;
-}*/
-
-#members {
-  color: black;
-  min-height: 100%;
+  padding: 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,21 +62,6 @@ h1, h2, h4, h5, p {
 .fit {
   min-height: 100%;
 }
-
-
-/*
-#facebook {
-  background-color: ;
-}
-
-#twitter {
-  background-color: ;
-}
-
-#google-plus {
-  background-color: ;
-}
-*/
 
 @-webkit-keyframes fadeIn {
   from {
