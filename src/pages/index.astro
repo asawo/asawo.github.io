@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="asawo">
+  <section class="hero">
+    <canvas id="scene"></canvas>
+  </section>
+
+  <section class="intro">
+    <h1><span class="prompt">&gt;</span> hello</h1>
+    <p class="bio">This page is made by <strong>Arthur Lechte</strong>.</p> 
+    <p class="bio">I am <a href="http://" target="_blank" rel="noopener noreferrer"></a> software engineer based in Tokyo. I mostly work with Go and cloud systems on the backend, but I like tinkering across the stack.</p>
+    <ul class="links" role="list">
+      <li><span class="prompt">&gt;</span> <a href="https://asawo.github.io/blog">blog</a></li>
+      <li><span class="prompt">&gt;</span> <a href="https://github.com/asawo">github</a></li>
+      <li><span class="prompt">&gt;</span> <a href="https://www.linkedin.com/in/alechte/">linkedin</a></li>
+    </ul>
+  </section>
+</Base>
+
+<script>
+  import { initScene } from '../scripts/scene';
+
+  const canvas = document.getElementById('scene') as HTMLCanvasElement;
+  if (canvas) initScene(canvas);
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+    height: 40vh;
+    min-height: 240px;
+    margin-bottom: 2rem;
+  }
+
+  #scene {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .intro h1 {
+    margin-bottom: 1rem;
+  }
+
+  .intro .bio {
+    max-width: 52ch;
+    margin-bottom: 1rem;
+    color: var(--color-text-muted);
+  }
+
+  .intro .bio strong {
+    color: var(--color-text);
+  }
+
+  .links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .links a {
+    font-weight: 700;
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <title>{title}</title>
+    <script is:inline>
+      const theme = localStorage.getItem('theme');
+      if (theme) document.documentElement.style.colorScheme = theme;
+    </script>
+  </head>
+  <body>
+    <nav>
+      <a href="/"><span class="prompt">&gt;</span> asawo</a>
+      <button class="theme-toggle" type="button" aria-label="Toggle theme"></button>
+    </nav>
+    <script>
+      import { DARK, LIGHT } from '../scripts/constants';
+
+      const btn = document.querySelector('.theme-toggle')!;
+
+      function effective() {
+        return localStorage.getItem('theme')
+          || (matchMedia(`(prefers-color-scheme: ${DARK})`).matches ? DARK : LIGHT);
+      }
+
+      function apply(theme: string) {
+        document.documentElement.style.colorScheme = theme;
+        btn.textContent = theme === DARK ? '\u2600' : '\u263D';
+        btn.setAttribute('aria-label',
+          theme === DARK ? 'Switch to light mode' : 'Switch to dark mode');
+      }
+
+      apply(effective());
+
+      btn.addEventListener('click', () => {
+        const next = effective() === DARK ? LIGHT : DARK;
+        localStorage.setItem('theme', next);
+        apply(next);
+      });
+    </script>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <span class="prompt">&gt;</span> &copy; {new Date().getFullYear()} <a href="https://github.com/asawo">asawo</a>
+    </footer>
+  </body>
+</html>
