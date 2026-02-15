@@ -53,18 +53,38 @@ export function initScene(canvas: HTMLCanvasElement): () => void {
   resize();
   window.addEventListener("resize", resize);
 
+  // Mouse tracking (normalized -1 to 1)
+  const mouse = { x: 0, y: 0 };
+  const smoothMouse = { x: 0, y: 0 };
+
+  function onMouseMove(e: MouseEvent) {
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+  }
+
+  window.addEventListener("mousemove", onMouseMove);
+
   let raf: number;
 
   function tick() {
     raf = requestAnimationFrame(tick);
     const t = performance.now() * 0.0005;
+
+    // Smooth interpolation toward cursor
+    smoothMouse.x += (mouse.x - smoothMouse.x) * 0.01;
+    smoothMouse.y += (mouse.y - smoothMouse.y) * 0.01;
+
     cube.rotation.x = t * 0.7;
     cube.rotation.y = t * 0.5;
     sphere.rotation.x = t * 0.3;
     sphere.rotation.y = t * 0.6;
     torus.rotation.x = t * 0.5;
     torus.rotation.y = t * 0.8;
-    group.rotation.y = Math.sin(t * 0.4) * 0.3;
+
+    // Group follows cursor with gentle tilt
+    group.rotation.y = smoothMouse.x * 0.6 + Math.sin(t * 0.4) * 0.15;
+    group.rotation.x = -smoothMouse.y * 0.3;
+
     renderer.render(scene, camera);
   }
 
@@ -73,6 +93,7 @@ export function initScene(canvas: HTMLCanvasElement): () => void {
   return () => {
     cancelAnimationFrame(raf);
     window.removeEventListener("resize", resize);
+    window.removeEventListener("mousemove", onMouseMove);
     observer.disconnect();
     renderer.dispose();
   };

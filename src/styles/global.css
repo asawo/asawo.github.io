@@ -25,6 +25,11 @@
 
 /* 3. Base elements */
 
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 body {
   font-family: var(--font-body);
   font-size: 0.95rem;
@@ -34,6 +39,11 @@ body {
   max-width: var(--content-width);
   margin: 0 auto;
   padding: 2rem 1rem;
+}
+
+nav,
+footer {
+  animation: fade-in 0.6s ease-out;
 }
 
 a {
