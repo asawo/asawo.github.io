@@ -38,17 +38,26 @@ const { title } = Astro.props;
 
       function apply(theme: string) {
         document.documentElement.style.colorScheme = theme;
-        btn.textContent = theme === DARK ? '\u2600' : '\u263D';
+        btn.innerHTML = '<span>' + (theme === 'dark' ? '\u2600' : '\u263D') + '</span>';
         btn.setAttribute('aria-label',
           theme === DARK ? 'Switch to light mode' : 'Switch to dark mode');
       }
 
       apply(effective());
 
+      // When navigating back, check the theme persists
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) apply(effective());
+      });
+
       btn.addEventListener('click', () => {
         const next = effective() === DARK ? LIGHT : DARK;
+        document.documentElement.classList.add('theme-transitioning');
         localStorage.setItem('theme', next);
         apply(next);
+        setTimeout(function () {
+            document.documentElement.classList.remove('theme-transitioning');
+          }, 300);
       });
     </script>
     <main>
