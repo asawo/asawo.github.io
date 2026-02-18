@@ -10,7 +10,7 @@ import Base from '../layouts/Base.astro';
   <section class="intro">
     <h1><span class="prompt">&gt;</span> hello</h1>
     <p class="bio">This page is made by <strong>Arthur Lechte</strong>.</p> 
-    <p class="bio">I am <a href="http://" target="_blank" rel="noopener noreferrer"></a> software engineer based in Tokyo. I mostly work with Go and cloud systems on the backend, but I like tinkering across the stack.</p>
+    <p class="bio">I am a software engineer based in Tokyo. I mostly work with Go and cloud systems on the backend, but I like tinkering across the stack.</p>
     <ul class="links" role="list">
       <li><span class="prompt">&gt;</span> <a href="https://asawo.github.io/blog">blog</a></li>
       <li><span class="prompt">&gt;</span> <a href="https://github.com/asawo">github</a></li>
@@ -24,6 +24,7 @@ import Base from '../layouts/Base.astro';
 
   const canvas = document.getElementById('scene') as HTMLCanvasElement;
   if (canvas) initScene(canvas);
+  document.body.classList.remove('loading');
 </script>
 
 <style>
@@ -45,10 +46,13 @@ import Base from '../layouts/Base.astro';
 
   .hero {
     opacity: 0;
+  }
+
+  body:not(.loading) .hero {
     animation: fade-in 0.8s ease-out 0.3s forwards;
   }
 
-  .intro {
+  body:not(.loading) .intro {
     animation: fade-in 0.6s ease-out;
   }
 
