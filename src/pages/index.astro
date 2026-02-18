@@ -24,6 +24,7 @@ import Base from '../layouts/Base.astro';
 
   const canvas = document.getElementById('scene') as HTMLCanvasElement;
   if (canvas) initScene(canvas);
+  document.body.classList.remove('loading');
 </script>
 
 <style>
@@ -45,10 +46,13 @@ import Base from '../layouts/Base.astro';
 
   .hero {
     opacity: 0;
+  }
+
+  body:not(.loading) .hero {
     animation: fade-in 0.8s ease-out 0.3s forwards;
   }
 
-  .intro {
+  body:not(.loading) .intro {
     animation: fade-in 0.6s ease-out;
   }
 
