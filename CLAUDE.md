@@ -2,7 +2,7 @@
 
 ## Project
 
-HP for **asawo** (Arthur Lechte). Built with Astro, deployed to GitHub Pages at `https://asawo.github.io`.
+HP for **asawo** (Arthur Lechte). Built with Astro, deployed to GitHub Pages at `https://arthur.lechte.dev` (custom domain; repo is `asawo/asawo.github.io`).
 
 ## Stack
 
